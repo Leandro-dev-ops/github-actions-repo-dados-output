@@ -1,0 +1,16 @@
+name: "Out Put example"
+run-name: Example workflow for input, execute for ${{github.actor}}
+on:
+    workflow_dispatch:
+jobs:
+    generated-output:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Generated output with shell
+              id: example-output
+              run: |
+               ACTION_RANDOM=$(( $RANDOM ))
+               echo action_random=$ACTION_RANDOM >> $GITHUB_OUTPUT
+               
+            - name: Show output of action Generated output with shell
+              run: echo "${{ steps.example-output.outputs.action_random }}"
